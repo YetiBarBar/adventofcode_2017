@@ -13,9 +13,9 @@ fn main() {
         count += 1;
         cur_pos += *value;
         *value += 1;
-        // println!("{:?}", &input);
     }
     println!("Part 1: {}", count);
+
     let mut input_data: Vec<isize> = input
         .lines()
         .map(str::trim)
@@ -29,7 +29,6 @@ fn main() {
         count += 1;
         cur_pos += *value;
         *value += if *value >= 3 { -1 } else { 1 };
-        // println!("{:?}", &input);
     }
     println!("Part 2: {}", count);
 }

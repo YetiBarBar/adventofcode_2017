@@ -18,7 +18,7 @@ fn clean_garbage(input: &str) -> (String, usize) {
         } else if chr == '<' {
             open_garbage = true;
         } else {
-            v.push(chr)
+            v.push(chr);
         }
     }
     (v.iter().collect(), count)
@@ -40,7 +40,7 @@ fn evaluate(input: &str, level: usize) -> usize {
                 if let Some(lp) = last_open {
                     top_level.push((lp, position));
                     last_open = None;
-                    depth = 0
+                    depth = 0;
                 } else {
                     panic!("unbalanced!");
                 }

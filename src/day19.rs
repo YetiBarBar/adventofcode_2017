@@ -11,21 +11,20 @@ fn main() {
         .lines()
         .map(|line| line.chars().collect::<Vec<char>>())
         .collect::<Vec<_>>();
-    let mut x = 0;
+
+    let mut x: usize = data[0]
+        .iter()
+        .enumerate()
+        .find(|(_, chr)| chr == &&'|')
+        .map(|(pos, _)| pos)
+        .unwrap();
+
     let mut y = 0;
     let mut res: Vec<char> = Vec::new();
 
     let mut dir = Direction::Down;
 
     let mut count = 0;
-
-    let x_start: usize = data[0]
-        .iter()
-        .enumerate()
-        .find(|(_, chr)| chr == &&'|')
-        .map(|(pos, _)| pos)
-        .unwrap();
-    x = x_start;
 
     while let Some(value) = get_x_y(x, y, &data) {
         count += 1;

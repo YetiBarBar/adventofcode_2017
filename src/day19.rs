@@ -29,14 +29,7 @@ fn main() {
 
     while let Some(value) = get_x_y(x, y, &data) {
         count += 1;
-        println!(
-            "x: {} y: {} => {} , {:?} : {}",
-            x,
-            y,
-            value,
-            dir,
-            res.iter().collect::<String>()
-        );
+
         match dir {
             Direction::Up => match value {
                 '|' | '-' => {
@@ -72,6 +65,7 @@ fn main() {
                 }
                 ' ' => (),
                 'T' => {
+                    res.push('T');
                     break;
                 }
                 _ => {
@@ -119,7 +113,8 @@ fn main() {
             },
         }
     }
-    println!("Step 2: {}", count);
+    println!("Part 1: {}", res.iter().collect::<String>());
+    println!("Part 2: {}", count);
 }
 
 fn get_x_y(x: usize, y: usize, data: &Vec<Vec<char>>) -> Option<&char> {

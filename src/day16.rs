@@ -99,19 +99,20 @@ fn main() {
         cpu.run_instructions(&instructions);
         cycle += 1;
         if cpu.memory == initial_memory {
+            println!("Cycle : {}", cycle);
             has_cycle = true;
             break;
         }
     }
 
     if has_cycle {
-        println!("Part 2: {}", cpu.memory.iter().collect::<String>());
-    } else {
-        // Reset cpu!
         let mut cpu = Cpu::new();
         for _ in 0..(1_000_000_000 % cycle) {
             cpu.run_instructions(&instructions);
         }
+        println!("Part 2: {}", cpu.memory.iter().collect::<String>());
+    } else {
+        // Reset cpu!
         println!("Part 2: {}", cpu.memory.iter().collect::<String>());
     }
 }

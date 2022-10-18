@@ -9,7 +9,7 @@ fn main() {
 
     let mut count = 0;
     let mut cur_pos: isize = 0;
-    while let Some(value) = input_data.get_mut(cur_pos as usize) {
+    while let Some(value) = input_data.get_mut(usize::try_from(cur_pos).unwrap()) {
         count += 1;
         cur_pos += *value;
         *value += 1;
@@ -25,7 +25,7 @@ fn main() {
 
     let mut count = 0;
     let mut cur_pos: isize = 0;
-    while let Some(value) = input_data.get_mut(cur_pos as usize) {
+    while let Some(value) = input_data.get_mut(usize::try_from(cur_pos).unwrap()) {
         count += 1;
         cur_pos += *value;
         *value += if *value >= 3 { -1 } else { 1 };

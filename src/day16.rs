@@ -34,7 +34,14 @@ pub struct Cpu {
     memory: Vec<char>,
 }
 
+impl Default for Cpu {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Cpu {
+    #[must_use]
     pub fn new() -> Self {
         Self {
             memory: ('a'..='p').collect(),
@@ -49,7 +56,11 @@ impl Cpu {
     pub fn exchange(&mut self, pos_1: usize, pos_2: usize) {
         self.memory.swap(pos_1, pos_2);
     }
-
+    /// Run partner instruction
+    ///
+    /// # Panics
+    ///
+    /// May panic if parsing fails! adventof code inputs are not supposed to be badly formed.
     pub fn partner(&mut self, chr_1: char, chr_2: char) {
         let pos_1 = self
             .memory
@@ -68,6 +79,11 @@ impl Cpu {
         self.memory.swap(pos_1, pos_2);
     }
 
+    /// Run an instruction set
+    ///
+    /// # Panics
+    ///
+    /// May panic if parsing fails! adventof code inputs are not supposed to be badly formed.
     pub fn run_instructions(&mut self, instructions: &[&str]) {
         for instr in instructions {
             let instr: Instruction = instr.parse().unwrap();

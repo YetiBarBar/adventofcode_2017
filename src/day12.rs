@@ -25,11 +25,7 @@ fn main() {
     let mut groups = 0;
     let mut founds: HashSet<usize> = HashSet::new();
     loop {
-        let val = hmap
-            .keys()
-            .skip_while(|key| founds.contains(key))
-            .next()
-            .unwrap();
+        let val = hmap.keys().find(|key| founds.contains(key)).unwrap();
 
         let group = find_group(&hmap, *val);
         groups += 1;
@@ -49,8 +45,8 @@ fn find_group(hmap: &HashMap<usize, HashSet<usize>>, value: usize) -> HashSet<us
     loop {
         let mut new_items = vec![];
         let mut to_remove = vec![];
-        for item in to_insert.iter() {
-            for &c in hmap.get(&item).unwrap() {
+        for item in &to_insert {
+            for &c in hmap.get(item).unwrap() {
                 if res.contains(&c) {
                     to_remove.push(c);
                 } else {

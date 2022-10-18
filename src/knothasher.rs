@@ -4,7 +4,14 @@ pub struct KnotHasher {
     current_position: usize,
 }
 
+impl Default for KnotHasher {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl KnotHasher {
+    #[must_use]
     pub fn new() -> Self {
         let mut buffer = [0; 256];
         for idx in 0_u8..=255 {
@@ -64,6 +71,7 @@ impl KnotHasher {
         })
     }
 
+    #[must_use]
     pub fn hash(input: &str) -> String {
         let mut knot = Self::new();
         knot.encode_str(input)

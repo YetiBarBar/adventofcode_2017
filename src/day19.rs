@@ -5,7 +5,6 @@ enum Direction {
     Right,
     Left,
 }
-
 fn main() {
     let data = include_str!("../data/day19.data")
         .lines()
@@ -32,7 +31,7 @@ fn main() {
         match dir {
             Direction::Up => match value {
                 '|' | '-' => {
-                    y = y - 1;
+                    y -= 1;
                 }
                 '+' => {
                     if data.get(y).unwrap().get(x.saturating_sub(1)) == Some(&'-') {
@@ -51,7 +50,7 @@ fn main() {
             },
             Direction::Down => match value {
                 '|' | '-' => {
-                    y = y + 1;
+                    y += 1;
                 }
                 '+' => {
                     if data.get(y).unwrap().get(x.saturating_sub(1)) == Some(&'-') {
@@ -74,7 +73,7 @@ fn main() {
             },
             Direction::Right => match value {
                 '|' | '-' => {
-                    x = x + 1;
+                    x += 1;
                 }
                 '+' => {
                     if data.get(y.saturating_sub(1)).unwrap().get(x) == Some(&'|') {
@@ -93,7 +92,7 @@ fn main() {
             },
             Direction::Left => match value {
                 '|' | '-' => {
-                    x = x - 1;
+                    x -= 1;
                 }
                 '+' => {
                     if data.get(y.saturating_sub(1)).unwrap().get(x) == Some(&'|') {
@@ -116,6 +115,6 @@ fn main() {
     println!("Part 2: {}", count);
 }
 
-fn get_x_y(x: usize, y: usize, data: &Vec<Vec<char>>) -> Option<&char> {
+fn get_x_y(x: usize, y: usize, data: &[Vec<char>]) -> Option<&char> {
     data.get(y)?.get(x)
 }

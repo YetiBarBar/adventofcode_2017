@@ -9,5 +9,5 @@ fn main() {
 
     let ones: u32 = knot_hashes.iter().map(|val| val.count_ones()).sum();
 
-    println!("Part 1: {}", ones)
+    println!("Part 1: {}", ones);
 }

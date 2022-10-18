@@ -64,7 +64,7 @@ impl FromStr for Programs {
 
         let (name, rest) = parts[0].split_once(' ').unwrap();
         let name = name.trim().to_string();
-        let number: String = rest.chars().filter(|c| c.is_ascii_digit()).collect();
+        let number: String = rest.chars().filter(char::is_ascii_digit).collect();
         let number: usize = number.parse().unwrap();
 
         if children.contains("") {
@@ -81,9 +81,10 @@ impl FromStr for Programs {
 fn main() {
     let input = include_str!("../data/day7.data");
 
-    let prgms: Vec<Programs> = input.lines().map(str::parse).map(Result::unwrap).collect();
-    let prgms: HashMap<String, Programs> = prgms
-        .into_iter()
+    let prgms: HashMap<String, Programs> = input
+        .lines()
+        .map(str::parse::<Programs>)
+        .map(Result::unwrap)
         .map(|item| (item.name.clone(), item))
         .collect();
 
@@ -109,12 +110,12 @@ fn main() {
     for prgm in candidates {
         println!("{}", prgm.0);
         println!("---------------");
-        println!("");
+        println!();
         for child in &prgm.1.children {
             println!("{} : {}", child, prgms.get(child).unwrap().weight(&prgms));
         }
-        println!("");
-        println!("");
+        println!();
+        println!();
     }
 
     /* println!(

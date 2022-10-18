@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-pub struct DebugBank {
+struct DebugBank {
     registers: Vec<usize>,
 }
 

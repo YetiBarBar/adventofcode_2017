@@ -11,6 +11,12 @@ fn main() {
         .map(|line| line.chars().collect::<Vec<char>>())
         .collect::<Vec<_>>();
 
+    let (res, count) = process(&data);
+    println!("Part 1: {}", res);
+    println!("Part 2: {}", count);
+}
+
+fn process(data: &[Vec<char>]) -> (String, i32) {
     let mut x: usize = data[0]
         .iter()
         .enumerate()
@@ -20,12 +26,9 @@ fn main() {
 
     let mut y = 0;
     let mut res: Vec<char> = Vec::new();
-
     let mut dir = Direction::Down;
-
     let mut count = 0;
-
-    while let Some(value) = get_x_y(x, y, &data) {
+    while let Some(value) = get_x_y(x, y, data) {
         count += 1;
 
         match dir {
@@ -111,8 +114,7 @@ fn main() {
             },
         }
     }
-    println!("Part 1: {}", res.iter().collect::<String>());
-    println!("Part 2: {}", count);
+    (res.iter().collect(), count)
 }
 
 fn get_x_y(x: usize, y: usize, data: &[Vec<char>]) -> Option<&char> {

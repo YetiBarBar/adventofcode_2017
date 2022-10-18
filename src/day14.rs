@@ -1,4 +1,4 @@
-use std::{cell, fmt::Display};
+use std::fmt::Display;
 
 use adventofcode_2017::knothasher::KnotHasher;
 
@@ -67,28 +67,28 @@ fn main() {
 }
 
 fn mark_cell(x: usize, y: usize, group: usize, level: usize, table: &mut Vec<Vec<Cell>>) -> bool {
-    if table.get(y).unwrap().get(x).unwrap().value {
-        if table.get(y).unwrap().get(x).unwrap().group.is_none() {
-            table[y][x].group = Some(group);
-            // Move up!
-            if y != 0 {
-                mark_cell(x, y - 1, group, level + 1, table);
-            }
-            // Then right
-            if x != 127 {
-                mark_cell(x + 1, y, group, level + 1, table);
-            }
-            // Then down
-            if y != 127 {
-                mark_cell(x, y + 1, group, level + 1, table);
-            }
-            // Then left
-            if x != 0 {
-                mark_cell(x - 1, y, group, level + 1, table);
-            }
-            if level == 0 {
-                return true;
-            }
+    if table.get(y).unwrap().get(x).unwrap().value
+        && table.get(y).unwrap().get(x).unwrap().group.is_none()
+    {
+        table[y][x].group = Some(group);
+        // Move up!
+        if y != 0 {
+            mark_cell(x, y - 1, group, level + 1, table);
+        }
+        // Then right
+        if x != 127 {
+            mark_cell(x + 1, y, group, level + 1, table);
+        }
+        // Then down
+        if y != 127 {
+            mark_cell(x, y + 1, group, level + 1, table);
+        }
+        // Then left
+        if x != 0 {
+            mark_cell(x - 1, y, group, level + 1, table);
+        }
+        if level == 0 {
+            return true;
         }
     }
     false

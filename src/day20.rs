@@ -23,9 +23,9 @@ impl Ord for Particle {
 impl Particle {
     fn current_position(&self, t: isize) -> (isize, isize, isize) {
         (
-            self.position.0 + self.speed.0 * t + self.acc.0 * t * t / 2,
-            self.position.1 + self.speed.1 * t + self.acc.1 * t * t / 2,
-            self.position.2 + self.speed.2 * t + self.acc.2 * t * t / 2,
+            self.position.0 + self.speed.0 * t + self.acc.0 * t * (t + 1) / 2,
+            self.position.1 + self.speed.1 * t + self.acc.1 * t * (t + 1) / 2,
+            self.position.2 + self.speed.2 * t + self.acc.2 * t * (t + 1) / 2,
         )
     }
 }
@@ -123,4 +123,32 @@ fn main() {
         .find(|item| item.1 == min)
         .unwrap();
     println!("Part 1: {:?}", index);
+
+    let mut stable_turn = 0;
+    let mut last_len = 0;
+    for idx in 1..4_000_000 {
+        let mut positions: HashMap<_, _> = HashMap::new();
+        for part in &particles {
+            *positions.entry(part.current_position(idx)).or_insert(0) += 1_usize;
+        }
+
+        // println!("{:?}", positions);
+        let new_particules: Vec<Particle> = particles
+            .into_iter()
+            .filter(|part| positions.get(&part.current_position(idx)).unwrap_or(&10) < &2)
+            .collect();
+
+        if new_particules.len() == last_len {
+            stable_turn += 1;
+        } else {
+            last_len = new_particules.len();
+        }
+        if stable_turn > 1_000_000 {
+            particles = new_particules;
+            break;
+        }
+        particles = new_particules;
+    }
+    // println!("Remaining particles: {:?}", particles);
+    println!("Remaining particles: {:?}", particles.len());
 }

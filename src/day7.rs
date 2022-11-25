@@ -88,7 +88,7 @@ fn main() {
         .map(|item| (item.name.clone(), item))
         .collect();
 
-    let mut res_name: String = "".into();
+    let mut res_name: String = String::new();
     for (ref_name, refr) in &prgms {
         if prgms
             .iter()

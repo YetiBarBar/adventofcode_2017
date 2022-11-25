@@ -1,5 +1,3 @@
-use std::collections::HashSet;
-
 struct DebugBank {
     registers: Vec<usize>,
 }
@@ -42,7 +40,7 @@ fn main() {
         .collect();
     let mut dbg_bank = DebugBank::new(&input);
     let mut count_step_1 = 0;
-    let mut hset = HashSet::new();
+    let mut hset = std::collections::HashSet::new();
     let mut value_to_search = vec![];
     for _ in 0.. {
         dbg_bank.redistribute();

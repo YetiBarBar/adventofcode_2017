@@ -143,19 +143,16 @@ fn main() {
 
     println!("Step 1: {}", cpu.count_mul);
 
-    /*  let mut cpu = Cpu::new(&commands);
-    cpu.registers.insert("a".to_string(), 1);
-    /cpu.registers.get_mut("a").unwrap() = 1;
-    loop {
-        if cpu.program.get(cpu.eip as usize).is_some() {
-            cpu.step();
-        } else {
-            break;
-        }
-    }
-
-    println!("Step 2: {:?}", cpu.registers);
+    /* Reversing engineering the prog
+    If a == 1, the program counts the number of primes between
+    of form 125_100 + 17 * idx for idx in 0..1001
     */
-    // Proceeding like that will take forever
-    // Have to understand program for optimisation!
+
+    let part2_res = (0..1001)
+        .filter(|idx| !primal::is_prime(108_100 + idx * 17))
+        .count();
+
+    // Between 904 and 910
+    // 907 autre input
+    println!("Part 2: {}", part2_res);
 }
